@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CodingTest</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="layout-top-nav layout-navbar-fixed">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <%= render partial: 'layouts/navbar' %>
+
+      <!-- Message -->
+      <%= render 'layouts/messages' %>
+
+      <div class="content-wrapper">
+        <!-- Content -->
+        <%= yield %>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <%= render partial: 'layouts/footer' %>
+    </footer>
+  </body>
+
+</html>

@@ -1,0 +1,64 @@
+<!-- Login Form -->
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo"><%= t('devise.sign_in') %></div>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+          <% unless devise_error_messages!.blank? %>
+            <% resource.errors.full_messages.each do |message| %>
+              <%= render partial: 'layouts/messages', locals: { flash: {alert: message} } %>
+            <% end %>
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label :email, class: 'control-label' %>
+            <div class="input-group mb-3">
+              <%= f.text_field :email, autofocus: true, class: 'form-control', required: true %>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password, class: 'control-label' %>
+            <div class="input-group mb-3">
+              <%= f.password_field :password, class: 'form-control', required: true %>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-lock" style="font-size: 18px;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <% if devise_mapping.rememberable? -%>
+              <div class="col-8">
+                <%= f.check_box :remember_me, class: 'icheck' %>
+                <%= f.label :remember_me, class: 'control-label' %>
+              </div>
+            <% end %>
+
+            <div class="col-4">
+              <%= f.submit t('devise.sign_in'), class: 'btn btn-block btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="social-auth-links text-center mb-3">
+          <hr class="mt-4 mb-4">
+          <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+            <%= link_to t('devise.sign_up'), new_registration_path(resource_name), class: 'btn btn-block btn-outline-primary text-bold' %>
+          <% end %>
+        </div>
+
+        <%= render "devise/shared/links" %>
+
+      </div>
+    </div>
+  </div>
+</div>

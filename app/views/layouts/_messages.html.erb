@@ -1,0 +1,15 @@
+<% if flash.present? %>
+  <div id='message'>
+   <script>
+     <% if flash[:notice] %>
+       toastr.success('<span><%= flash[:notice] %></span>')
+     <% end %>
+     <% if flash[:alert] %>
+       toastr.error('<span><%= flash[:alert] %></span>')
+     <% end %>
+     <% if flash[:error] %>
+       toastr.error('<span><%= flash[:error] %></span>')
+     <% end %>
+   </script>
+  </div>
+<% end %>

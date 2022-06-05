@@ -1,0 +1,58 @@
+<nav class="main-header navbar navbar-expand-md navbar-dark navbar-blue">
+  <div class="container">
+    <a href="<%= root_path %>" class="navbar-brand">
+      <span class="brand-text"><%= t 'home.title' %></span>
+    </a>
+
+    <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Left navbar links -->
+    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+      <% if can? :read, User %>
+        <ul class="nav navbar-nav">
+          <li class="nav-item <%= 'active' if controller_name == 'users' %>"><%= link_to t('models.user.other'), users_path, class: 'nav-link' %></li>
+        </ul>
+      <% end %>
+      <% if can? :read, Note %>
+        <ul class="nav navbar-nav">
+          <li class="nav-item <%= 'active' if controller_name == 'notes' %>"><%= link_to t('models.note.other'), notes_path, class: 'nav-link' %></li>
+        </ul>
+      <% end %>
+
+      <!-- Right navbar links -->
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <!-- Usuario -->
+        <% if user_signed_in? && current_user %>
+          <li class="nav-item dropdown <%= 'active' if controller_name == 'users' %>">
+            <a class="nav-link nav-icon" data-toggle="dropdown" href="#">
+              <i class="fa fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-md-right">
+              <span class="dropdown-header">
+                <div class="media">
+                  <div class="media-body">
+                    <h3 class="dropdown-item-title"><%= current_user.name %></h3>
+                    <p class="text-sm"><%= current_user.email %></p>
+                  </div>
+                </div>
+              </span>
+              <div class="dropdown-divider"></div>
+              <%= link_to t('actions.edit'), edit_user_path(current_user), class: 'dropdown-item dropdown-footer' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to t('devise.logout'), destroy_user_session_path, method: :delete, class: 'dropdown-item dropdown-footer' %>
+            </div>
+          </li>
+        <% end %>
+
+        <!-- Pantalla completa -->
+        <li class="nav-item">
+          <a class="nav-link last-nav-link nav-icon" data-widget="fullscreen" href="#" role="button">
+            <i class="fa fa-arrows-alt"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

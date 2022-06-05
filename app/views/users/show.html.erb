@@ -1,0 +1,59 @@
+<!-- Content Header -->
+<section class="content-header">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <h1 class="m-0"><%= @user.name %></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="content">
+  <div class="container">
+    <div class="row">
+      <!-- User -->
+      <div class="col-12">
+        <div class="card card-primary card-outline">
+          <div class="row">
+            <div class="card-body">
+              <dl class="dl-horizontal">
+                <div class="row">
+                  <div class="col-6">
+                    <dt><%= t 'attributes.user.name' %></dt>
+                    <dd><%= @user.name %></dd>
+                    <dt><%= t 'attributes.user.email' %></dt>
+                    <dd><%= mail_to @user.email, @user.email %></dd>
+                    <dt><%= t 'attributes.user.role' %></dt>
+                    <dd><%= @user.role %></dd>
+                  </div>
+                  <div class="col-6">
+                    <dt><%= t 'attributes.user.sign_in_count' %></dt>
+                    <dd><%= @user.sign_in_count %></dd>
+                    <dt><%= t 'attributes.user.current_sign_in_ip' %></dt>
+                    <dd><%= @user.current_sign_in_ip %></dd>
+                    <dt><%= t 'attributes.user.current_sign_in_at' %></dt>
+                    <dd><%= @user.current_sign_in_at %></dd>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <%= link_to t('actions.back'), users_path, class: 'btn btn-secondary float-left' %>
+          <div class="float-right">
+            <%= link_to t('actions.edit'), edit_user_path(@user), class: 'btn btn-default' if can?(:update, @user) %>
+            <%= link_to t('actions.delete'), user_path(@user), method: :delete, data: { confirm: t('actions.confirm_destroy') }, class: 'btn btn-danger' if can?(:destroy, @user) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

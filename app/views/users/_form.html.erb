@@ -1,0 +1,49 @@
+<%= form_for @user do |f| %>
+  <%= errors @user %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name, class: 'control-label required' %>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, class: 'control-label required' %>
+        <%= f.text_field :email, class: "form-control", required: true %>
+      </div>
+
+      <% if can? :write, user %>
+        <div class="form-group">
+          <%= f.label :role, class: 'control-label required' %>
+          <%= f.select :role, User.roles.collect{ |k,v| [k, k] }.compact, { prompt: true }, { class: "form-control select2-no-search", required: true } %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password, class: 'control-label required' %>
+        <%= f.password_field :password, autocomplete: 'new-password', class: "form-control" %>
+        <% unless current_page?(action: :new) %>
+          <small><%= t 'attributes.user.password_blank' %></small>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, class: "control-label required" %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+
+      <div class="form-action">
+        <div class="row">
+          <div class="col-md-12">
+            <%= link_to t('actions.cancel'), can?(:read, User) ? users_path : root_path, class: 'btn btn-secondary' %>
+            <div class="float-right">
+              <%= f.submit t('actions.save'), class: 'btn btn-success' if can? :update, user %>
+              <%= link_to t('actions.delete'), user, method: :delete, data: { confirm: t('actions.confirm_destroy') }, class: 'btn btn-danger' if can?(:destroy, user) && action_name == 'edit' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

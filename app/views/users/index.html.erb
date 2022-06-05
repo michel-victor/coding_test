@@ -1,0 +1,63 @@
+<!-- Content Header -->
+<section class="content-header">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-md-12 col-sm-12">
+        <h1 class="m-0 float-left"><%= t 'models.user.other' %></h1>
+        <%= link_to "#{t 'actions.new'} #{t 'models.user.one'}", new_user_path, class: 'btn btn-primary float-right' if can?(:create, User) %>
+      </div>
+      <div class="col-md-4 col-sm-4 offset-2 float-right">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= t 'attributes.user.name' %></th>
+              <th><%= t 'attributes.user.email' %></th>
+              <th><%= t 'attributes.user.role' %></th>
+              <th><%= t 'attributes.user.sign_in_count' %></th>
+              <th><%= t 'attributes.user.current_sign_in_ip' %></th>
+              <th><%= t 'attributes.user.current_sign_in_at' %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= mail_to user.email, user.email %></td>
+                <td><%= user.role %></td>
+                <td><%= user.sign_in_count %></td>
+                <td><%= user.current_sign_in_ip %></td>
+                <td><%= l(user.current_sign_in_at) if user.current_sign_in_at %></td>
+                <td class="col-1 text-nowrap">
+                  <div class="float-right">
+                    <%= link_to '', user_path(user), class: 'action-link fas fa-eye', title: t('actions.show') if can?(:read, user) %>
+                    <%= link_to '', edit_user_path(user), class: 'action-link fas fa-pen', title: t('actions.edit') if can?(:update, user) %>
+                    <%= link_to '', user, method: :delete, data: { confirm: t('actions.confirm_destroy') }, class: 'action-link fa fa-times', title: t('actions.delete') if can?(:destroy, user) %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="paginate">
+          <hr>
+          <small><%= page_entries_info @users, entry_name: '' %></small>
+          <div class="pagination pagination-sm">
+            <%= paginate @users, theme: 'bootstrap' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

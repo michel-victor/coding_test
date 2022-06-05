@@ -1,0 +1,65 @@
+<!-- Content Header -->
+<section class="content-header">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-md-12 col-sm-12">
+        <h1 class="m-0 float-left"><%= t 'models.note.other' %></h1>
+        <%= link_to "#{t 'actions.new'} #{t 'models.note.one'}", new_note_path, class: 'btn btn-primary float-right' if can?(:create, Note) %>
+      </div>
+      <div class="col-md-4 col-sm-4 offset-2 float-right">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= t 'attributes.note.title' %></th>
+              <th><%= t 'attributes.note.text' %></th>
+              <% unless current_user.user? %>
+                <th><%= t 'attributes.note.user' %></th>
+              <% end %>
+              <th><%= t 'attributes.note.created_at' %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @notes.each do |note| %>
+              <% if can? :read, note %>
+              <tr>
+                <td><%= note.title %></td>
+                <td><%= note.text.truncate(150) %></td>
+                <% unless current_user.user? %>
+                  <td><%= note.user.name %></td>
+                <% end %>
+                <td class="col-1 text-nowrap"><%= l note.created_at.to_date %></td>
+                <td class="col-1 text-nowrap">
+                  <div class="float-right">
+                    <%= link_to '', note_path(note), class: 'action-link fas fa-eye', title: t('actions.show') if can?(:read, note) %>
+                    <%= link_to '', edit_note_path(note), class: 'action-link fas fa-pen', title: t('actions.edit') if can?(:update, note) %>
+                    <%= link_to '', note, method: :delete, data: { confirm: t('actions.confirm_destroy') }, class: 'action-link fa fa-times', title: t('actions.delete') if can?(:destroy, note) %>
+                  </div>
+                </td>
+              </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="paginate">
+          <hr>
+          <small><%= page_entries_info @notes, entry_name: '' %></small>
+          <div class="pagination pagination-sm">
+            <%= paginate @notes, theme: 'bootstrap' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

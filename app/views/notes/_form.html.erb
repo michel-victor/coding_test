@@ -1,0 +1,29 @@
+<%= form_for @note do |f| %>
+  <%= errors @note %>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <%= f.label :title, class: 'control-label required' %>
+        <%= f.text_field :title, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :text, class: 'control-label required' %>
+        <%= f.text_area :text, class: "form-control", rows: 10, required: true %>
+      </div>
+
+      <div class="form-action">
+        <div class="row">
+          <div class="col-md-12">
+            <%= link_to t('actions.cancel'), can?(:read, User) ? notes_path : root_path, class: 'btn btn-secondary' %>
+            <div class="float-right">
+              <%= f.submit t('actions.save'), class: 'btn btn-success' if can? :update, note %>
+              <%= link_to t('actions.delete'), note, method: :delete, data: { confirm: t('actions.confirm_destroy') }, class: 'btn btn-danger' if can?(:destroy, note) && action_name == 'edit' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

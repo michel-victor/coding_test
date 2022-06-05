@@ -1,0 +1,76 @@
+en:
+  home:
+    title: Coding Test
+    welcome: Welcome
+
+  models:
+    user:
+      one: User
+      other: Users
+    note:
+      one: Note
+      other: Notes
+
+  notice:
+    creation_ok: 'Successfully created'
+    edition_ok: 'Successfully edited'
+    deletion_ok: 'Successfully deleted'
+
+  actions:
+    new: New
+    edit: Edit
+    show: Show
+    delete: Delete
+    save: Save
+    cancel: Cancel
+    back: Back
+    confirm_destroy: 'Are you sure?'
+
+  attributes:
+    user:
+      name: Name
+      email: Email
+      role: Role
+      password: Password
+      password_confirmation: 'Password confirmation'
+      sign_in_count: Sign in count
+      current_sign_in_ip: Sign in ip
+      current_sign_in_at: Sign in at
+      password_blank: 'Leave blank to keep the current password'
+    note:
+      user: User
+      title: Title
+      text: Text
+      created_at: Created at
+
+  errors:
+    contains: Contains
+
+  devise:
+    sign_in: 'Sign in'
+    sign_up: 'Sign up'
+    forgot_password_question: 'Forgot your password?'
+    send_password_instructions: 'Send me reset password instructions'
+    unlock_instructions_question: 'Unlock instructions'
+    resend_unlock_instructions: 'Resend unlock instructions'
+
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %b"
+      day_month: "%d de %B"
+      month_year: "%B de %Y"
+    order:
+    - :day
+    - :month
+    - :year
+  time:
+    am: am
+    formats:
+      default: "%d/%m/%y %H:%M:%S %Z"
+      short: "%d de %b %H:%M:%S %Z"
+      long: "%A, %d de %B de %Y %H:%M:%S %Z"
+      very_long: "%A, %d de %B de %Y %H:%M:%S %Z"
+      month_year: "%B de %Y %Z"
+    pm: pm

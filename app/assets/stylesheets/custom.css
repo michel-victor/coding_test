@@ -1,0 +1,15 @@
+#toast-container {
+  margin-top: 60px;
+}
+
+.action-link.fa-times {
+  color: red;
+}
+
+.action-link {
+  padding: 2px;
+}
+
+.welcome {
+  margin-top: 20px;
+}
