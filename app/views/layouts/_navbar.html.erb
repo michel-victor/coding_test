@@ -10,15 +10,17 @@
 
     <!-- Left navbar links -->
     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
-      <% if can? :read, User %>
-        <ul class="nav navbar-nav">
-          <li class="nav-item <%= 'active' if controller_name == 'users' %>"><%= link_to t('models.user.other'), users_path, class: 'nav-link' %></li>
-        </ul>
-      <% end %>
-      <% if can? :read, Note %>
-        <ul class="nav navbar-nav">
-          <li class="nav-item <%= 'active' if controller_name == 'notes' %>"><%= link_to t('models.note.other'), notes_path, class: 'nav-link' %></li>
-        </ul>
+      <% if user_signed_in? && current_user %>
+        <% if can? :read, Note %>
+          <ul class="nav navbar-nav">
+            <li class="nav-item <%= 'active' if controller_name == 'notes' %>"><%= link_to t('models.note.other'), notes_path, class: 'nav-link' %></li>
+          </ul>
+        <% end %>
+        <% if can? :read, User %>
+          <ul class="nav navbar-nav">
+            <li class="nav-item <%= 'active' if controller_name == 'users' %>"><%= link_to t('models.user.other'), users_path, class: 'nav-link' %></li>
+          </ul>
+        <% end %>
       <% end %>
 
       <!-- Right navbar links -->
