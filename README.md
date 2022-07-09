@@ -1,52 +1,71 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It is a small Ruby on Rails notes application, with the following functionality:
 
-Things you may want to cover:
+## Manage Sessions
 
-* Ruby version
+* Login/Logout
+
+## CRUD a note (has title, text, user)
+
+* When a note is added/updated/deleted then the user should receive a flash message.
+* Validate the notes (no empty fields allowed).
+
+## Manage Access to Notes
+
+* Seed the application with additional users.
+* Create roles USER, READER And ADMIN.
+* Create a config screen so that ADMIN can be assigned a role.
+* Restrict Access by Role, so users with the USER role can create a and read their own notes, READER role can see all notes and users with ADMIN can fully administer all notes (CRUD everything).
+
+## Things you may want to cover:
+
+### Ruby version
+
 3.0.2
 
-* Rails version
+### Rails version
+
 6.1.4.1
 
-* System dependencies
+### System dependencies
 
-* Configuration
-Using RVM:
+* Devise for Authentication
+* CanCanCan for Authorization (view /models/abiliti.rb for more information about ACLs).
+* Kaminari fot Pagination.
+* Twitter Bootstrap layout.
+* AdminLTE twitter bootstrap based template.
 
-.ruby-version: 3.0.2
-.ruby-gemset: coding_test
+### Using RVM
 
-* Database creation
-Actually using SQLITE.
+> .ruby-version: 3.0.2
+> .ruby-gemset: coding_test
 
-* Database initialization
+### Database creation
+
+Actually using SQLITE for development enviroment.
+
+### Database initialization
+
+```
 rake db:setup
+```
 
-In case of failure:
+#### In case of failure
+
+```
 rails db:drop
 rails db:create
 rails db:migrate
 rails db:seed
+```
 
-* How to run the test suite
+### Database seeds
 
-* Services (job queues, cache servers, search engines, etc.)
+> name: 'John', email: 'john@example.com', role: user, password: '123456789'
+> name: 'Peter', email: 'peter@example.com', role: reader, password: '123456789'
+> name: 'Mary', email: 'mary@example.com', role: admin, password: '123456789'
 
-* Deployment instructions
+### Deployment instructions
 
-run rails server:
 rails s
-
-* Notes
-Using Devise gem for Authentication.
-Using CanCanCan gem for Authorization (view /models/abiliti.rb for more information about ACLs).
-
-Seed users:
-name: 'John', email: 'john@example.com', role: user, password: '123456789'
-name: 'Peter', email: 'peter@example.com', role: reader, password: '123456789'
-name: 'Mary', email: 'mary@example.com', role: admin, password: '123456789'
-
-* ...
